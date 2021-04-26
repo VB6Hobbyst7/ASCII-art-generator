@@ -1,0 +1,12 @@
+H:\Documents\GCSE\Computer Science\ASCII art generator\bin\Debug\ASCII art generator.exe.config
+H:\Documents\GCSE\Computer Science\ASCII art generator\bin\Debug\ASCII art generator.exe
+H:\Documents\GCSE\Computer Science\ASCII art generator\bin\Debug\ASCII art generator.pdb
+H:\Documents\GCSE\Computer Science\ASCII art generator\bin\Debug\ASCII art generator.xml
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.vbprojAssemblyReference.cache
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII_art_generator.Form1.resources
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII_art_generator.Resources.resources
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.vbproj.GenerateResource.cache
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.vbproj.CoreCompileInputs.cache
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.exe
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.xml
+H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.pdb
