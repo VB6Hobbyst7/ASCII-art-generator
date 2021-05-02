@@ -18,7 +18,24 @@ Public Class Form1
         Dim bmp As Bitmap = PictureBox1.BackgroundImage
         PictureBox2.BackgroundImage = ConvertToGreyscale(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
+
+        bmp = PictureBox2.BackgroundImage
+        PictureBox2.BackgroundImage = Pixelate(bmp)
+        PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
     End Sub
+
+
+
+    Function CropToScale(ByVal source As Bitmap) As Bitmap
+        Dim CropRect As New Rectangle(100, 0, 100, 100)
+        Dim OriginalImage = source
+        Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+        Using grp = Graphics.FromImage(CropImage)
+            grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            OriginalImage.Dispose()
+        End Using
+    End Function
+
 
     Function ConvertToGreyscale(ByVal source As Bitmap) As Bitmap
         Dim bm As New Bitmap(source)
@@ -34,5 +51,41 @@ Public Class Form1
         Return bm
     End Function
 
+
+    Function Pixelate(ByVal source As Bitmap) As Bitmap
+        Dim bm As New Bitmap(source)
+        Dim c As Color
+        Dim averageRed As Integer
+        Dim averageGreen As Integer
+        Dim averageBlue As Integer
+        Dim x, y As Integer
+
+        Using fp As New FastPix(bm)
+
+
+
+
+            For y = 0 To 9
+                For x = 0 To 9
+                    c = fp.GetPixel(x, y)
+                    averageRed += c.R
+                    averageGreen += c.G
+                    averageBlue += c.B
+                Next
+            Next
+
+            averageRed /= (x * y)
+            averageGreen /= (x * y)
+            averageBlue /= (x * y)
+
+            For y = 1 To 50
+                For x = 1 To 50
+                    fp.SetPixel(x, y, Color.FromArgb(averageRed, averageGreen, averageBlue))
+                Next
+            Next
+
+            Return bm
+        End Using
+    End Function
 
 End Class

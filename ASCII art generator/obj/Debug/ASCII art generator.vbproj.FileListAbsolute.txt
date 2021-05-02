@@ -10,3 +10,15 @@ H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art gener
 H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.exe
 H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.xml
 H:\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.pdb
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\bin\Debug\ASCII art generator.exe.config
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\bin\Debug\ASCII art generator.exe
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\bin\Debug\ASCII art generator.pdb
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\bin\Debug\ASCII art generator.xml
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.vbprojAssemblyReference.cache
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII_art_generator.Form1.resources
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII_art_generator.Resources.resources
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.vbproj.GenerateResource.cache
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.vbproj.CoreCompileInputs.cache
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.exe
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.xml
+f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASCII art generator.pdb
