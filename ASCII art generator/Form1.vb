@@ -20,8 +20,12 @@ Public Class Form1
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
 
         bmp = PictureBox2.BackgroundImage
-        PictureBox2.BackgroundImage = Pixelate(bmp)
+        PictureBox2.BackgroundImage = CropToScale(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
+
+        'bmp = PictureBox2.BackgroundImage
+        'PictureBox2.BackgroundImage = Pixelate(bmp)
+        'PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
     End Sub
 
 
@@ -34,6 +38,7 @@ Public Class Form1
             grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
             OriginalImage.Dispose()
         End Using
+        Return CropImage
     End Function
 
 
@@ -63,28 +68,38 @@ Public Class Form1
         Using fp As New FastPix(bm)
 
 
+            For yCount = 0 To Math.Floor(source.Height / 50)
+                For xCount = 0 To Math.Floor(source.Width / 50)
 
 
-            For y = 0 To 9
-                For x = 0 To 9
-                    c = fp.GetPixel(x, y)
-                    averageRed += c.R
-                    averageGreen += c.G
-                    averageBlue += c.B
+                    For y = 0 To 49
+                        For x = 0 To 49
+                            c = fp.GetPixel(x + xCount * 50, y + yCount * 50)
+                            averageRed += c.R
+                            averageGreen += c.G
+                            averageBlue += c.B
+                        Next
+                    Next
+
+                    averageRed /= (x * y)
+                    averageGreen /= (x * y)
+                    averageBlue /= (x * y)
+
+                    For y = 0 To 49
+                        For x = 0 To 49
+                            fp.SetPixel(x + xCount * 50, y + yCount * 50, Color.FromArgb(averageRed, averageGreen, averageBlue))
+                        Next
+                    Next
+                    averageRed = 0
+                    averageGreen = 0
+                    averageBlue = 0
                 Next
             Next
 
-            averageRed /= (x * y)
-            averageGreen /= (x * y)
-            averageBlue /= (x * y)
-
-            For y = 1 To 50
-                For x = 1 To 50
-                    fp.SetPixel(x, y, Color.FromArgb(averageRed, averageGreen, averageBlue))
-                Next
-            Next
 
             Return bm
+
+
         End Using
     End Function
 
