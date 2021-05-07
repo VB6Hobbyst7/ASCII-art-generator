@@ -129,17 +129,13 @@ Public Class Form1
 
 
 
-        For y = 0 To bm.Height - 1 Step 10
+        For y As Integer = 0 To bm.Height - 1 Step 10
 
-            For x = 0 To bm.Width - 1 Step 10
+            For x As Integer = 0 To bm.Width - 1 Step 10
 
-                Try
-                    brightness = bm.GetPixel(x, y).GetBrightness()
-                    position = brightness / (1 / textTable.Length)
-                    asciiArt(y / 10, x / 10) = textTable(position - 1)
-                Catch
-                    Continue For
-                End Try
+                brightness = bm.GetPixel(x, y).GetBrightness()
+                position = (brightness / Convert.ToDouble(1 / textTable.Length))
+                asciiArt((y / 10), (x / 10)) = textTable(position - 1)
             Next
         Next
 

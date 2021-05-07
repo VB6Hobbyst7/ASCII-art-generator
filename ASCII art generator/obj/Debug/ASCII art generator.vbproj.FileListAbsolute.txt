@@ -34,3 +34,15 @@ f:\Users\Children Games\Documents\Dylan\Coding\ASCII art generator\obj\Debug\ASC
 \\ex-sr-file02\exa-studentwork$\Hadrian\Intake2016\GarrattD.16\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.exe
 \\ex-sr-file02\exa-studentwork$\Hadrian\Intake2016\GarrattD.16\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.xml
 \\ex-sr-file02\exa-studentwork$\Hadrian\Intake2016\GarrattD.16\Documents\GCSE\Computer Science\ASCII art generator\obj\Debug\ASCII art generator.pdb
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\bin\Debug\ASCII art generator.exe.config
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\bin\Debug\ASCII art generator.exe
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\bin\Debug\ASCII art generator.pdb
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\bin\Debug\ASCII art generator.xml
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.vbprojAssemblyReference.cache
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII_art_generator.Form1.resources
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII_art_generator.Resources.resources
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.vbproj.GenerateResource.cache
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.vbproj.CoreCompileInputs.cache
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.exe
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.xml
+C:\Users\Children games\Documents\GitHub\ASCII-art-generator\ASCII art generator\obj\Debug\ASCII art generator.pdb
