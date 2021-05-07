@@ -23,15 +23,36 @@ Public Class Form1
         PictureBox2.BackgroundImage = CropToScale(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
 
-        'bmp = PictureBox2.BackgroundImage
-        'PictureBox2.BackgroundImage = Pixelate(bmp)
-        'PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
+        bmp = PictureBox2.BackgroundImage
+        PictureBox2.BackgroundImage = Pixelate(bmp)
+        PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
+
+        bmp = PictureBox2.BackgroundImage
+        asciiArt = ConvertToText(bmp)
+
+        Dim finalArt As String
+
+
+        For y = 0 To (bmp.Height - 1) / 10
+            For x = 0 To (bmp.Width - 1) / 10
+                finalArt = finalArt + Str(asciiArt(x, y))
+            Next
+            finalArt += vbNewLine
+        Next
+
+        TextBox1.Text = finalArt
     End Sub
 
 
 
     Function CropToScale(ByVal source As Bitmap) As Bitmap
-        Dim CropRect As New Rectangle(100, 0, 100, 100)
+        Dim bm As New Bitmap(source)
+        Dim newWidth As Integer = bm.Width - (bm.Width Mod 10)
+        Dim newHeight As Integer = bm.Height - (bm.Height Mod 10)
+
+        Dim CropRect As New Rectangle()
+        CropRect.Width = newWidth
+        CropRect.Height = newHeight
         Dim OriginalImage = source
         Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
         Using grp = Graphics.FromImage(CropImage)
@@ -67,14 +88,12 @@ Public Class Form1
 
         Using fp As New FastPix(bm)
 
+            For yCount = 0 To (source.Height / 10) - 1
+                For xCount = 0 To (source.Width / 10) - 1
 
-            For yCount = 0 To Math.Floor(source.Height / 50)
-                For xCount = 0 To Math.Floor(source.Width / 50)
-
-
-                    For y = 0 To 49
-                        For x = 0 To 49
-                            c = fp.GetPixel(x + xCount * 50, y + yCount * 50)
+                    For y = 0 To 9
+                        For x = 0 To 9
+                            c = fp.GetPixel(x + xCount * 10, y + yCount * 10)
                             averageRed += c.R
                             averageGreen += c.G
                             averageBlue += c.B
@@ -85,22 +104,46 @@ Public Class Form1
                     averageGreen /= (x * y)
                     averageBlue /= (x * y)
 
-                    For y = 0 To 49
-                        For x = 0 To 49
-                            fp.SetPixel(x + xCount * 50, y + yCount * 50, Color.FromArgb(averageRed, averageGreen, averageBlue))
+                    For y = 0 To 9
+                        For x = 0 To 9
+                            fp.SetPixel(x + xCount * 10, y + yCount * 10, Color.FromArgb(averageRed, averageGreen, averageBlue))
                         Next
                     Next
+
                     averageRed = 0
                     averageGreen = 0
                     averageBlue = 0
+
                 Next
             Next
 
-
             Return bm
 
-
         End Using
+    End Function
+
+    Function ConvertToText(ByVal source As Bitmap) As String(,)
+        Dim bm As New Bitmap(source)
+        Dim brightness As Double
+        Dim position As Integer
+
+
+
+        For y = 0 To bm.Height - 1 Step 10
+
+            For x = 0 To bm.Width - 1 Step 10
+
+                Try
+                    brightness = bm.GetPixel(x, y).GetBrightness()
+                    position = brightness / (1 / textTable.Length)
+                    asciiArt(y / 10, x / 10) = textTable(position - 1)
+                Catch
+                    Continue For
+                End Try
+            Next
+        Next
+
+        Return asciiArt
     End Function
 
 End Class
