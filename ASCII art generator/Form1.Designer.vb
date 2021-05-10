@@ -32,9 +32,9 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(351, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 186)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(386, 210)
+        Me.PictureBox1.Size = New System.Drawing.Size(197, 150)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -51,18 +51,18 @@ Partial Class Form1
         '
         'PictureBox2
         '
-        Me.PictureBox2.Location = New System.Drawing.Point(0, 291)
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 342)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(598, 333)
+        Me.PictureBox2.Size = New System.Drawing.Size(197, 151)
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(1110, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(203, 0)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(129, 606)
+        Me.TextBox1.Size = New System.Drawing.Size(1050, 493)
         Me.TextBox1.TabIndex = 3
         '
         'Form1
@@ -70,7 +70,7 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1247, 626)
+        Me.ClientSize = New System.Drawing.Size(1247, 493)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Button1)

@@ -15,6 +15,8 @@ Public Class Form1
     End Sub
 
     Sub ImageFunctions()
+        Dim asciiart(,) As String
+
         Dim bmp As Bitmap = PictureBox1.BackgroundImage
         PictureBox2.BackgroundImage = ConvertToGreyscale(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
@@ -35,7 +37,7 @@ Public Class Form1
 
         For y = 0 To (bmp.Height - 1) / 10
             For x = 0 To (bmp.Width - 1) / 10
-                finalArt = finalArt + Str(asciiArt(x, y))
+                finalArt = finalArt + asciiart(x, y)
             Next
             finalArt += vbNewLine
         Next
@@ -126,16 +128,16 @@ Public Class Form1
         Dim bm As New Bitmap(source)
         Dim brightness As Double
         Dim position As Integer
-
-
+        Dim asciiArt(bm.Width - (bm.Width Mod 10), bm.Height - (bm.Height Mod 10)) As String
+        Dim TextTable() As String = {"  ", "..", ",,", "::", ";;", "~~", "--", "++", "ii", "!!", "ll", "II", "??", "rr", "cc", "vv", "uu", "LL", "CC", "JJ", "UU", "YY", "XX", "ZZ", "00", "QQ", "WW", "MM", "BB", "88", "&&", "%%", "$$", "##", "@@"}
 
         For y As Integer = 0 To bm.Height - 1 Step 10
 
             For x As Integer = 0 To bm.Width - 1 Step 10
 
                 brightness = bm.GetPixel(x, y).GetBrightness()
-                position = (brightness / Convert.ToDouble(1 / textTable.Length))
-                asciiArt((y / 10), (x / 10)) = textTable(position - 1)
+                position = (brightness / Convert.ToDouble(1 / TextTable.Length))
+                asciiArt((x / 10), (y / 10)) = TextTable(position - 1)
             Next
         Next
 
