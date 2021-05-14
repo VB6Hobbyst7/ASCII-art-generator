@@ -135,16 +135,17 @@ Public Class Form1
     End Function
 
     Function TopThread(ByVal source As Bitmap) As Bitmap
-        Static thread_num As Integer = 0
-        Dim new_counter As New Counter(Me, thread_num)
-        thread_num += 1
 
-        Dim counter_thread As New Thread(AddressOf _
-    new_counter.Run)
+        Dim newThread As New Counter(Me, 0)
 
-        counter_thread.IsBackground = True
+        Dim threadOne, threadTwo As New Thread(AddressOf newThread.Run)
 
-        counter_thread.Start()
+        threadOne.IsBackground = True
+        threadTwo.IsBackground = True
+        threadOne.Start()
+        threadTwo.Start()
+
+
 
 
     End Function
@@ -177,39 +178,32 @@ End Class
 
 
 Public Class Counter
-    Private m_MyForm As Form1
-    Private m_Number As Integer
+    Private formOne As Form1
+    Private threadnumber As Integer
 
     Public Sub New(ByVal my_form As Form1, ByVal my_number _
         As Integer)
-        m_MyForm = my_form
-        m_Number = my_number
+        formOne = my_form
+        threadNumber = my_number
     End Sub
-
 
     'http://www.vb-helper.com/howto_net_run_threads.html
 
-    ' Count off seconds in the Output window.
     Public Sub Run()
         Try
             Do
-                MsgBox("thread1")
+                MsgBox("thread")
                 Thread.Sleep(1000)
 
-                SyncLock m_MyForm
-
-                    m_MyForm.Value += 1
+                SyncLock formOne
 
 
-                    Debug.WriteLine(m_Number & ": " &
-                        m_MyForm.Value)
                 End SyncLock
             Loop
         Catch ex As Exception
-
-            Debug.WriteLine("Unexpected error in thread " & _
- _
-                m_Number & vbCrLf & ex.Message)
+            Debug.WriteLine("Unexpected error in thread ")
         End Try
     End Sub
+
+
 End Class
