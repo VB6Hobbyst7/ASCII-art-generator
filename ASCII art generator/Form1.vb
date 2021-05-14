@@ -1,5 +1,11 @@
 ﻿Imports System.IO
+Imports System.Threading
+
 Public Class Form1
+
+
+    Public pixelSize As Integer
+    Public Value As Integer = 0
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -11,11 +17,13 @@ Public Class Form1
             PictureBox1.BackgroundImage = Image.FromFile(ofd.FileName)
             PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
         End If
+        pixelSize = Int(TrackBar1.Value)
         ImageFunctions()
     End Sub
 
     Sub ImageFunctions()
         Dim asciiart(,) As String
+
 
         Dim bmp As Bitmap = PictureBox1.BackgroundImage
         PictureBox2.BackgroundImage = ConvertToGreyscale(bmp)
@@ -25,18 +33,20 @@ Public Class Form1
         PictureBox2.BackgroundImage = CropToScale(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
 
+        TopThread(bmp)
+
         bmp = PictureBox2.BackgroundImage
         PictureBox2.BackgroundImage = Pixelate(bmp)
         PictureBox2.BackgroundImageLayout = ImageLayout.Zoom
 
         bmp = PictureBox2.BackgroundImage
-        asciiArt = ConvertToText(bmp)
+        asciiart = ConvertToText(bmp)
 
         Dim finalArt As String
 
 
-        For y = 0 To (bmp.Height - 1) / 10
-            For x = 0 To (bmp.Width - 1) / 10
+        For y = 0 To (bmp.Height - 1) / pixelSize
+            For x = 0 To (bmp.Width - 1) / pixelSize
                 finalArt = finalArt + asciiart(x, y)
             Next
             finalArt += vbNewLine
@@ -49,8 +59,8 @@ Public Class Form1
 
     Function CropToScale(ByVal source As Bitmap) As Bitmap
         Dim bm As New Bitmap(source)
-        Dim newWidth As Integer = bm.Width - (bm.Width Mod 10)
-        Dim newHeight As Integer = bm.Height - (bm.Height Mod 10)
+        Dim newWidth As Integer = bm.Width - (bm.Width Mod pixelSize)
+        Dim newHeight As Integer = bm.Height - (bm.Height Mod pixelSize)
 
         Dim CropRect As New Rectangle()
         CropRect.Width = newWidth
@@ -90,12 +100,12 @@ Public Class Form1
 
         Using fp As New FastPix(bm)
 
-            For yCount = 0 To (source.Height / 10) - 1
-                For xCount = 0 To (source.Width / 10) - 1
+            For yCount = 0 To (source.Height / pixelSize) - 1
+                For xCount = 0 To (source.Width / pixelSize) - 1
 
-                    For y = 0 To 9
-                        For x = 0 To 9
-                            c = fp.GetPixel(x + xCount * 10, y + yCount * 10)
+                    For y = 0 To pixelSize - 1
+                        For x = 0 To pixelSize - 1
+                            c = fp.GetPixel(x + xCount * pixelSize, y + yCount * pixelSize)
                             averageRed += c.R
                             averageGreen += c.G
                             averageBlue += c.B
@@ -106,9 +116,9 @@ Public Class Form1
                     averageGreen /= (x * y)
                     averageBlue /= (x * y)
 
-                    For y = 0 To 9
-                        For x = 0 To 9
-                            fp.SetPixel(x + xCount * 10, y + yCount * 10, Color.FromArgb(averageRed, averageGreen, averageBlue))
+                    For y = 0 To pixelSize - 1
+                        For x = 0 To pixelSize - 1
+                            fp.SetPixel(x + xCount * pixelSize, y + yCount * pixelSize, Color.FromArgb(averageRed, averageGreen, averageBlue))
                         Next
                     Next
 
@@ -124,24 +134,82 @@ Public Class Form1
         End Using
     End Function
 
+    Function TopThread(ByVal source As Bitmap) As Bitmap
+        Static thread_num As Integer = 0
+        Dim new_counter As New Counter(Me, thread_num)
+        thread_num += 1
+
+        Dim counter_thread As New Thread(AddressOf _
+    new_counter.Run)
+
+        counter_thread.IsBackground = True
+
+        counter_thread.Start()
+
+
+    End Function
+
+
     Function ConvertToText(ByVal source As Bitmap) As String(,)
         Dim bm As New Bitmap(source)
         Dim brightness As Double
         Dim position As Integer
-        Dim asciiArt(bm.Width - (bm.Width Mod 10), bm.Height - (bm.Height Mod 10)) As String
+        Dim asciiArt(bm.Width - (bm.Width Mod pixelSize), bm.Height - (bm.Height Mod pixelSize)) As String
         Dim TextTable() As String = {"  ", "..", ",,", "::", ";;", "~~", "--", "++", "ii", "!!", "ll", "II", "??", "rr", "cc", "vv", "uu", "LL", "CC", "JJ", "UU", "YY", "XX", "ZZ", "00", "QQ", "WW", "MM", "BB", "88", "&&", "%%", "$$", "##", "@@"}
 
-        For y As Integer = 0 To bm.Height - 1 Step 10
+        For y As Integer = 0 To bm.Height - 1 Step pixelSize
 
-            For x As Integer = 0 To bm.Width - 1 Step 10
+            For x As Integer = 0 To bm.Width - 1 Step pixelSize
 
                 brightness = bm.GetPixel(x, y).GetBrightness()
                 position = (brightness / Convert.ToDouble(1 / TextTable.Length))
-                asciiArt((x / 10), (y / 10)) = TextTable(position - 1)
+                asciiArt((x / pixelSize), (y / pixelSize)) = TextTable(position - 1)
             Next
         Next
 
         Return asciiArt
     End Function
 
+    Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+        pixelSize = Int(TrackBar1.Value)
+    End Sub
+End Class
+
+
+Public Class Counter
+    Private m_MyForm As Form1
+    Private m_Number As Integer
+
+    Public Sub New(ByVal my_form As Form1, ByVal my_number _
+        As Integer)
+        m_MyForm = my_form
+        m_Number = my_number
+    End Sub
+
+
+    'http://www.vb-helper.com/howto_net_run_threads.html
+
+    ' Count off seconds in the Output window.
+    Public Sub Run()
+        Try
+            Do
+                MsgBox("thread1")
+                Thread.Sleep(1000)
+
+                SyncLock m_MyForm
+
+                    m_MyForm.Value += 1
+
+
+                    Debug.WriteLine(m_Number & ": " &
+                        m_MyForm.Value)
+                End SyncLock
+            Loop
+        Catch ex As Exception
+
+            Debug.WriteLine("Unexpected error in thread " & _
+ _
+                m_Number & vbCrLf & ex.Message)
+        End Try
+    End Sub
 End Class
